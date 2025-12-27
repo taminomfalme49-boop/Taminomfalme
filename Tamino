@@ -1,0 +1,205 @@
+DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TV Tamino Matangazo</title>
+
+<style>
+body{
+  background:#000;
+  color:#fff;
+  font-family:Arial, sans-serif;
+  text-align:center;
+  margin:0;
+}
+#tvBox{
+  max-width:420px;
+  margin:auto;
+  background:#111;
+  border-radius:12px;
+  padding:10px;
+}
+video{
+  width:100%;
+  border-radius:10px;
+  background:#000;
+}
+button{
+  margin:5px;
+  padding:10px;
+  width:95%;
+  border:none;
+  border-radius:8px;
+  font-size:14px;
+  cursor:pointer;
+}
+.add{background:#1abc9c;}
+.meta{background:#f6851b;}
+.binance{background:#f3ba2f;color:#000;}
+.cash{background:#27ae60;}
+.info{
+  margin:8px 0;
+  font-size:15px;
+}
+.ads{
+  background:#222;
+  padding:8px;
+  margin-top:8px;
+  border-radius:8px;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<h3>📺 TV Tamino Matangazo</h3>
+
+<div id="tvBox">
+
+<video id="tv" autoplay muted playsinline controls></video>
+
+<div class="info">
+🪙 Coin: <span id="coins">0</span>  
+<br>🎥 Video = 10 Coin (≈ Tsh 10,000)
+</div>
+
+<button class="add" onclick="addVideo()">➕ Ongeza Tangazo (Simu/PC)</button>
+
+<button class="cash" onclick="mpesa()">💰 Toa Pesa / Coin</button>
+
+<button class="meta" onclick="openMetaMask()">🔗 MetaMask</button>
+<button class="binance" onclick="openBinance()">🔗 Binance</button>
+
+<div class="ads">
+📢 Nafasi ya Ads  
+(Ads zako / Google Ads / Video nyingine)
+</div>
+
+</div>
+
+<input type="file" id="fileInput" accept="video/*" multiple hidden>
+
+<script>
+const tv = document.getElementById("tv");
+const fileInput = document.getElementById("fileInput");
+
+let coins = localStorage.getItem("taminoCoins")
+  ? parseInt(localStorage.getItem("taminoCoins"))
+  : 0;
+
+document.getElementById("coins").innerText = coins;
+
+// VIDEO 20 ZA KUANZIA (HTTPS HALISI)
+let playlist = [
+  "https://www.w3schools.com/html/mov_bbb.mp4",
+  "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+  "https://media.w3.org/2010/05/sintel/trailer.mp4",
+  "https://media.w3.org/2010/05/bunny/trailer.mp4",
+  "https://media.w3.org/2010/05/video/movie_300.mp4"
+];
+
+// rudia mpaka zifike 20
+while(playlist.length < 20){
+  playlist.push(playlist[playlist.length % 5]);
+}
+
+let index = 0;
+
+function playVideo(i){
+  tv.src = playlist[i];
+  tv.play().catch(()=>{});
+}
+
+tv.onended = () => {
+  coins += 10;
+  localStorage.setItem("taminoCoins", coins);
+  document.getElementById("coins").innerText = coins;
+
+  index = (index + 1) % playlist.length;
+  playVideo(index);
+};
+
+playVideo(index);
+
+// ONGEZA VIDEO ZA NDANI
+function addVideo(){
+  fileInput.click();
+}
+
+fileInput.onchange = () => {
+  for(let file of fileInput.files){
+    let url = URL.createObjectURL(file);
+    playlist.push(url);
+  }
+  alert("Video zimeongezwa kwenye TV");
+};
+
+// LINKS HALISI
+function openMetaMask(){
+  window.location.href = "https://metamask.app.link/";
+}
+
+function openBinance(){
+  window.location.href = "https://www.binance.com/";
+}
+
+function mpesa(){
+  alert(
+    "Coin zako: " + coins +
+    "\nBadilisha kupitia MetaMask au Binance"
+  );
+}
+</script>
+
+</body>
+</html>
+<iframe 
+
+
+DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Buttons</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    .upload-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .upload-btn {
+      padding: 12px 18px;
+      background-color: #ff5722;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    .upload-btn:hover {
+      background-color: #e64a19;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="upload-buttons">
+    <a href="https://www.youtube.com/upload" target="_blank" class="upload-btn">YouTube Upload</a>
+    <a href="https://www.tiktok.com/upload?lang=en" target="_blank" class="upload-btn">TikTok Upload</a>
+    <a href="https://www.facebook.com/creatorstudio" target="_blank" class="upload-btn">Facebook Upload</a>
+    <a href="https://twitter.com/intent/tweet" target="_blank" class="upload-btn">Twitter Tweet</a>
+  </div>
+
+</body>
+</html>
